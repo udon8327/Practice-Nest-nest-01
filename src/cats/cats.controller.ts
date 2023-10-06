@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Req, HttpCode, Redirect, Header, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req, HttpCode, Redirect, Header, Query, Ip } from '@nestjs/common';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat.dto';
@@ -20,8 +20,9 @@ export class CatsController {
 
   @Get()
   @Header('Cache-Control', 'none!!')
-  findAll(@Query() query) {
-    console.log('req:', query);
+  findAll(@Query() query, @Ip() ip) {
+    console.log('ip: ', ip);
+    console.log('query:', query);
     return this.catsService.findAll(query);
   }
 

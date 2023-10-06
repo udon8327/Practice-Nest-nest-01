@@ -9,7 +9,7 @@ export class CatsService {
   }
 
   create(body: CreateCatDto) {
-    return `This action adds a new cat: ${body.name}`;
+    return `This action adds a new cat: ${body.name || '野良猫'}`;
   }
 
   findAll(query) {
