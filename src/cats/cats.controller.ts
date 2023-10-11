@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Req, HttpCode, Redirect, Header, Query} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req, HttpCode, Redirect, Header, Query, HttpException, HttpStatus } from '@nestjs/common';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat.dto';
@@ -9,18 +9,26 @@ export class CatsController {
 
   @Get('girl')
   test() {
+    throw new HttpException(
+      {
+        code: 'C001',
+        message: '出錯囉!',
+        data: {
+          url: 'https://www.google.com.tw/',
+        },
+      },
+      HttpStatus.BAD_REQUEST,
+    );
     return this.catsService.test();
   }
 
   @Post()
-  @Redirect('https://www.google.com.tw/')
   create(@Body() body: CreateCatDto) {
     console.log('body: ', body);
     return this.catsService.create(body);
   }
 
   @Get()
-  @Redirect('https://nestjs.com', 301)
   @Header('Cache-Control', 'no-store')
   findAll(@Query() query) {
     console.log('query:', query);
@@ -28,9 +36,9 @@ export class CatsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    console.log('id: ', id);
-    return this.catsService.findOne(+id);
+  findOne(@Param() params): string {
+    console.log('id: ', params.id);
+    return this.catsService.findOne(+params.id);
   }
 
   @Patch(':id')
