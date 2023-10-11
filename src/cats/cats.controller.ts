@@ -13,7 +13,7 @@ export class CatsController {
   }
 
   @Post()
-  @Redirect('https://www.google.com.tw/', 301)
+  @Redirect('https://www.google.com.tw/')
   create(@Body() body: CreateCatDto) {
     console.log('body: ', body);
     return this.catsService.create(body);
