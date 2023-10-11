@@ -1,5 +1,6 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
+import { AnimalMiddleware } from './middleware/animal/animal.middleware';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TodoController } from './todo/todo.controller';
@@ -16,6 +17,6 @@ import { DogsModule } from './dogs/dogs.module';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes('cats');
+    consumer.apply(LoggerMiddleware, AnimalMiddleware).forRoutes('cats');
   }
 }
