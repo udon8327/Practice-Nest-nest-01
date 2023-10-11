@@ -19,7 +19,7 @@ export class CatsController {
   }
 
   @Get()
-  @Header('Cache-Control', 'none!!')
+  @Header('Cache-Control', 'no-store')
   findAll(@Query() query, @Ip() ip) {
     console.log('ip: ', ip);
     console.log('query:', query);
