@@ -1,21 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateCatDto } from './dto/create-cat.dto';
-import { EditCatDto } from './dto/edit-cat.dto';
-import { UpdateCatDto } from './dto/update-cat.dto';
-import { Cats } from './interface/cats.interface';
+import { CreateCatDto, EditCatDto } from './dto/cats.dto';
 
 @Injectable()
 export class CatsService {
-  constructor(@InjectModel('Cats') private readonly catsModel: Model<Cats>) {}
+  constructor(@InjectModel('Cats') private readonly catsModel) {}
 
   test() {
     return `Cats girl!!!`;
   }
 
   // DB
-  async getCatsList(): Promise<Cats[]> {
+  async getCatsList(): Promise<void> {
     const cats = await this.catsModel.find();
     return cats;
   }
@@ -33,7 +30,7 @@ export class CatsService {
   }
   // DB
 
-  create(body: CreateCatDto) {
+  create(body) {
     return `This action adds a new cat: ${body.name || '野良猫'}`;
   }
 
@@ -50,7 +47,7 @@ export class CatsService {
     return `This action returns a #${id} cat`;
   }
 
-  update(id: number, updateCatDto: UpdateCatDto) {
+  update(id: number) {
     return `This action updates a #${id} cat`;
   }
 

@@ -1,7 +1,7 @@
 import { Schema } from 'mongoose';
 
-export const catsSchema = new Schema({
-  _id: { type: String, required: true }, // 覆盖 Mongoose 生成的默认 _id
+export const CatsSchema = new Schema({
+  id: { type: String },
   user_name: { type: String, required: true },
   password: { type: String, required: true },
 });

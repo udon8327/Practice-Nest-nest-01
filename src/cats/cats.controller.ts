@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Req, HttpCode, Redirect, Header, Query, HttpException, HttpStatus } from '@nestjs/common';
 import { CatsService } from './cats.service';
-import { CreateCatDto } from './dto/create-cat.dto';
-import { UpdateCatDto } from './dto/update-cat.dto';
+import { CreateCatDto, EditCatDto } from './dto/cats.dto';
 
 @Controller('cats')
 export class CatsController {
@@ -18,7 +17,7 @@ export class CatsController {
   }
 
   @Post('create')
-  async createCat(@Body() body) {
+  async createCat(@Body() body: CreateCatDto) {
     console.log('body: ', body);
     return {
       code: 200,
@@ -28,7 +27,7 @@ export class CatsController {
   }
 
   @Post('edit/:id')
-  async editCat(@Body() body, @Param() param) {
+  async editCat(@Param() param, @Body() body: EditCatDto) {
     console.log('body: ', body);
     console.log('param: ', param);
     return {
@@ -84,8 +83,8 @@ export class CatsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCatDto: UpdateCatDto) {
-    return this.catsService.update(+id, updateCatDto);
+  update(@Param('id') id: string, @Body() body) {
+    return this.catsService.update(+id);
   }
 
   @Delete(':id')
