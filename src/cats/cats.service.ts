@@ -1,15 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
 import { CreateCatDto, EditCatDto } from './dto/cats.dto';
 
 @Injectable()
 export class CatsService {
   constructor(@InjectModel('Cats') private readonly catsModel) {}
-
-  test() {
-    return `Cats girl!!!`;
-  }
 
   // DB
   async getCatsList(): Promise<void> {
@@ -29,6 +24,10 @@ export class CatsService {
     await this.catsModel.findByIdAndDelete(_id);
   }
   // DB
+
+  test() {
+    return `Cats girl!!!`;
+  }
 
   create(body) {
     return `This action adds a new cat: ${body.name || '野良猫'}`;
