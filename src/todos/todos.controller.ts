@@ -14,6 +14,12 @@ export class TodosController {
     return todosData;
   }
 
+  @Get(':id')
+  getTodo(@Param('id') id): TodoDto {
+    const todoData = todosData.find((todo) => todo.id === id);
+    return todoData;
+  }
+
   @Post()
   createTodo(@Body() createTodo: TodoDto): TodoDto {
     const newTodo: TodoDto = {
