@@ -5,13 +5,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
 import { DogsModule } from './dogs/dogs.module';
+import { TodosModule } from './todos/todos.module';
 
 const DBModule = MongooseModule.forRoot(
   'mongodb+srv://udon8327:hsnu108327@cluster-nest.nsgharc.mongodb.net/NestDB?retryWrites=true&w=majority',
 );
 
 @Module({
-  imports: [DBModule, CatsModule, DogsModule],
+  imports: [DBModule, CatsModule, DogsModule, TodosModule],
   controllers: [AppController],
   providers: [AppService],
 })
