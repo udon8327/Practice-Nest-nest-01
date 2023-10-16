@@ -12,8 +12,8 @@ const DBModule = MongooseModule.forRoot(
 );
 
 @Module({
-  // imports: [DBModule, CatsModule, DogsModule, TodosModule],
-  imports: [TodosModule],
+  imports: [DBModule, CatsModule, DogsModule, TodosModule],
+  // imports: [TodosModule],
   controllers: [AppController],
   providers: [AppService],
 })
