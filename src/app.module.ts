@@ -1,5 +1,4 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
-// import { CorsMiddleware } from '@nestjs/platform-express';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AnimalMiddleware } from './middleware/animal/animal.middleware';
 import { AppController } from './app.controller';
@@ -20,7 +19,6 @@ const DBModule = MongooseModule.forRoot(
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    // consumer.apply(CorsMiddleware).forRoutes('*');
     consumer.apply(AnimalMiddleware).forRoutes('cats');
   }
 }
