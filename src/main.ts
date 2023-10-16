@@ -4,11 +4,7 @@ import helmet from 'helmet';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors({
-    origin: '*',
-    allowedHeaders: ['Authorization', 'content-type'],
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  });
+  app.enableCors({ origin: /.+/ });
   app.use(helmet());
   await app.listen(3000);
 }
