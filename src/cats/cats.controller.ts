@@ -21,7 +21,7 @@ export class CatsController {
     console.log('body: ', body);
     return {
       code: 200,
-      data: '',
+      data: await this.catsService.createCat(body),
       message: '新增成功',
     };
   }
